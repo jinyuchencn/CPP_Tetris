@@ -1,11 +1,21 @@
 #pragma once
 
+#include <sys/stat.h>
 #include <vector>
 #include <map>
 
 #include "Windows.h"
 
 #include "common/vec.h"
+
+
+enum class Color{
+    Red=0,
+    Green,
+    Blue,
+    White,
+    Black
+};
 
 class Render{
 
@@ -19,31 +29,35 @@ public:
 
     void init();
     void update();
-    void destroy();
 
+    void destroy();
     void drawLine(int x,int y,int length,int dir/*vertical if 0 */,std::vector<unsigned char> color);
     void drawRectangle(int x,int y,int w,int h,std::vector<unsigned char> color);
     void setPixel(int w, int h, const std::vector<unsigned char> & color,unsigned char* source);
 
     static std::vector<unsigned char> Red(){
-        return std::vector<unsigned char>{255,0,0,255};
+        return m_colors[Color::Red];
     }
     static std::vector<unsigned char> Green(){
-        return std::vector<unsigned char>{0,255,0,255};
+        return m_colors[Color::Green];
     }
     static std::vector<unsigned char> Blue(){
-        return std::vector<unsigned char>{0,0,255,255};
+        return m_colors[Color::Blue];
     }
     static std::vector<unsigned char> White(){
-        return std::vector<unsigned char>{255,255,255,255};
+        return m_colors[Color::White];
     }
     static std::vector<unsigned char> Black(){
-        return std::vector<unsigned char>{0,0,0,255};
+        return m_colors[Color::Black];
     }
+
+
     
     ~Render();
 
 private:
+
+    static std::map<Color,std::vector<unsigned char>> m_colors;
 
     void platformInit();
     void platformUpdate();

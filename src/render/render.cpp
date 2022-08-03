@@ -20,6 +20,13 @@ Render::Render(int w,int h){
     m_width = w;
     m_height = h;
     m_buffer = new unsigned char[w * h * 4];
+    
+    m_colors[Color::Red] = std::vector<unsigned char>{255,0,0,255};
+    m_colors[Color::Green] = std::vector<unsigned char>{0,255,0,255};
+    m_colors[Color::Blue] = std::vector<unsigned char>{0,0,255,255};
+    m_colors[Color::White] = std::vector<unsigned char>{255,255,255,255};
+    m_colors[Color::Black] = std::vector<unsigned char>{0,0,0,255};
+
 }
 
 Render::~Render(){
